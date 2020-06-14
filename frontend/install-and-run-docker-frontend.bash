@@ -1,34 +1,31 @@
 #!/bin/bash
-#
+
+
 # UCSC Extension DevOps
-# Homework 6
-# Michael McCarthy
+# Homework 7
 #
-# Build and Run Docker Backend
+#
+# Build and Run Docker Frontend
 #
 
-dockernetwork="UCSCDevOpsMicroServices"
-BACKEND_IPADDR=""
-cd ~/UCSC/DevOps/d6/frontend
+cd ~/UCSC/DevOps/d6/frontend/
 
-# docker images | findstr ws:latest
+sudo docker images | grep ws:latest
 # if %ERRORLEVEL% NEQ 0 (
-
-echo 'building frontendend docker image'
-docker build web --rm -t ws:latest
-
+    echo 'building frontend docker image'
+    sudo docker build web --rm -t ws:latest
 # )
 
 # Start docker ws service in background as ws
 
-echo ""
-BACKEND_IPADDR='docker inspect --format {{.NetworkSettings.Networks.$dockernetwork.IPAddress}} daemon' 
-echo ""
+set dockernetwork="UCSCDevOpsMicroServices"
 
-# docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' daemon > %BACKEND_IPADDR%
-
+sudo docker inspect --format {{.NetworkSettings.Networks.%dockernetwork%.IPAddress}} daemon > BACKEND_IPADDR
+# echo ""
+# set /p BACKEND_IPADDR= < BACKEND_IPADDR.TXT 
+# del BACKEND_IPADDR.TXT
+# set BACKEND_IPADDR="172.19.0.2"
 echo "Backend IP is: " $BACKEND_IPADDR
 
-docker run --rm -d --name ws -p 81:8000 --network $dockernetwork -e BACKEND_IP=$BACKEND_IPADDR ws
-
+sudo docker run --rm -d --name ws -p 81:8000 --network $dockernetwork -e BACKEND_IP=$BACKEND_IPADDR ws
 
