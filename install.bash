@@ -2,7 +2,7 @@
 #
 # UCSC Extension DevOps
 # Michael McCarthy
-# Homework 6
+# Homework 7
 #
 
 dockernetwork="UCSCDevOpsMicroServices"
@@ -10,36 +10,16 @@ dockernetwork="UCSCDevOpsMicroServices"
 echo "-------- check/build Docker Network ---------"
 sudo docker network create --driver bridge $dockernetwork
 
-# Misc Notes
-
-# To recompile web server on frontend from /frontend outside vagrant
-# vagrant provision --provision-with frontend
-
-# To recompile web server on backend from /backend outside vagrant
-# vagrant provision --provision-with backend
-
-# To see logs on frontend from /frontend outside vagrant
-# vagrant ssh -- 'docker logs ws'
-
-# To see logs on backend from /backend outside vagrant
-# vagrant ssh -- 'docker logs daemon'
-
-# To test frontend from /frontend outside vagrant
-# vagrant ssh -- 'curl localhost'
-
-# To test backend from /backend outside vagrant
-# vagrant ssh -- 'curl localhost'
-
 # Build backend service 
 
 cd backend
-# build-and-run-docker-backend.script 
+build-and-run-docker-backend.script 
 cd ..
 
 # Build frontend webservice. 
 
 cd frontend
-# build-and-run-docker-frontend.script 
+build-and-run-docker-frontend.script 
 cd ..
 
 

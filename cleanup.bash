@@ -1,33 +1,32 @@
-@echo off
-rem
-rem UCSC Extension DevOps
-rem Homework 6
-rem Michael McCarthy
-rem
-rem c.bat, cleanup
+#!/bin/bash
+#
+# UCSC Extension DevOps
+# Homework 7
+# cleanup.bat
+#
 
-set dockernetwork="UCSCDevOpsMicroServices"
+dockernetwork="UCSCDevOpsMicroServices"
 
-rem kill backend docker container
+# kill backend docker container
 
-rem docker container stop nginx02-container
-
-
-rem remove backend docker image
-
-rem docker image rm ucsc-devops/nginx01
+docker container stop daemon
 
 
-rem kill frontend docker container
+# remove backend docker image
 
-rem docker container stop nginx02-container
-
-
-rem remove frontend docker image
-
-rem docker image rm ucsc-devops/nginx01
+docker image rm daemon:latest
 
 
-rem remove user-defined bridged docker network
+# kill frontend docker container
 
-docker network rm %dockernetwork%
+docker container stop ws
+
+
+# remove frontend docker image
+
+docker image rm ws:latest
+
+
+# remove user-defined bridged docker network
+
+docker network rm $dockernetwork
