@@ -1,2 +1,2 @@
-Nameko
 psutil
+Nameko
